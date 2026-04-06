@@ -1,0 +1,12 @@
+    <script>
+(function(){
+var pref=<%= JSON.stringify(typeof publicTheme !== 'undefined' ? publicTheme : 'system') %>;
+if(pref!=='system')return;
+var mq=window.matchMedia('(prefers-color-scheme: dark)');
+function sync(){
+document.documentElement.setAttribute('data-bs-theme',mq.matches?'dark':'light');
+}
+mq.addEventListener('change',sync);
+})();
+    </script>
+    <script src="/public/js/bootstrap.bundle.min.js"></script>

@@ -1,0 +1,12 @@
+<div class="mx-auto text-center" style="max-width: 32rem;">
+    <h1 class="display-6 fw-bold mb-3">Добро пожаловать</h1>
+    <p class="lead text-muted mb-4">Публичная часть доступна без входа. После входа — личный кабинет и разделы по роли.</p>
+    <div class="d-flex flex-wrap gap-2 justify-content-center">
+        <% if (typeof user !== 'undefined' && user) { %>
+            <a class="btn btn-primary btn-lg" href="/app">Личный кабинет</a>
+        <% } else { %>
+            <a class="btn btn-primary btn-lg" href="/login">Войти</a>
+        <% } %>
+        <a class="btn btn-outline-secondary btn-lg" href="/p/example">Демо плагина</a>
+    </div>
+</div>

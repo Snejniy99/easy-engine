@@ -1,0 +1,60 @@
+<div class="d-flex flex-column flex-md-row align-items-md-start justify-content-md-between gap-3 mb-4">
+    <div>
+        <h1 class="h3 fw-bold mb-1">Панель управления</h1>
+        <p class="text-muted small mb-0">Модули и сводка</p>
+    </div>
+    <div class="d-flex flex-wrap gap-2">
+        <span class="badge rounded-pill text-bg-primary px-3 py-2">Модулей: <%= pluginCount %></span>
+        <span class="badge rounded-pill text-bg-secondary px-3 py-2">Пользователей: <%= userCount %></span>
+    </div>
+</div>
+
+<section class="ee-module-inserts mb-4">
+    <div class="row row-cols-1 row-cols-lg-2 g-3">
+        <div class="col d-flex">
+            <%- eeWidget('example:demo-admin') %>
+        </div>
+    </div>
+</section>
+
+<% if (plugins.length === 0) { %>
+    <div class="card border-2 border-dashed border-secondary bg-light">
+        <div class="card-body text-center py-5 px-4">
+            <p class="fw-semibold mb-2">Плагины не подключены</p>
+            <p class="text-muted small mb-0">Добавьте каталог с <code>index.ts</code> в <code>plugins/</code> или включите модули в <a href="/admin/settings">настройках</a>.</p>
+        </div>
+    </div>
+<% } else { %>
+    <h2 class="h5 fw-bold mb-3">Активные модули</h2>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+        <% plugins.forEach(plugin => { %>
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start gap-3">
+                            <div class="rounded-3 bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center fw-bold flex-shrink-0 px-3 py-2 fs-5 lh-1">
+                                <%= plugin.id[0].toUpperCase() %>
+                            </div>
+                            <div class="min-w-0">
+                                <h3 class="h6 card-title mb-2"><%= plugin.name %></h3>
+                                <% const zones = []; if (plugin.hasAppSpace) zones.push('кабинет'); if (plugin.hasPublicSpace) zones.push('публичные страницы'); %>
+                                <p class="card-text small text-muted mb-0">
+                                    <% if (zones.length) { %><%= zones.join(' · ') %> · <% } %><span class="text-success">активен</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0 pt-0 d-flex flex-wrap gap-2">
+                        <a href="/admin/<%= plugin.id %>" class="btn btn-sm btn-primary">Администрирование</a>
+                        <% if (plugin.hasAppSpace) { %>
+                            <a href="/app/<%= plugin.id %>" class="btn btn-sm btn-outline-secondary">Кабинет</a>
+                        <% } %>
+                        <% if (plugin.hasPublicSpace) { %>
+                            <a href="/p/<%= plugin.id %>" class="btn btn-sm btn-outline-secondary">Публично</a>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+<% } %>

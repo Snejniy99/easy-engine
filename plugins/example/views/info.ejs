@@ -1,0 +1,8 @@
+<div class="mb-4">
+    <h1 class="h3 fw-bold text-primary mb-3"><%= title %></h1>
+    <p class="mb-2"><a href="<%= typeof appUrl !== 'undefined' ? appUrl : '/app/example' %>">Личный кабинет</a> · <a href="<%= typeof publicUrl !== 'undefined' ? publicUrl : '/p/example' %>">Публичная страница</a></p>
+    <% var readmeHref = (typeof urls !== 'undefined') ? urls.static('readme.txt') : null; %>
+    <% if (readmeHref) { %>
+    <p class="small text-secondary mb-0"><a href="<%= readmeHref %>" target="_blank" rel="noopener">readme.txt</a> из <code>plugins/example/public/</code></p>
+    <% } %>
+</div>

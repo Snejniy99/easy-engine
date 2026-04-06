@@ -1,0 +1,20 @@
+<% const sid = node.id.replace(/[^a-zA-Z0-9_-]/g, "-"); %>
+<% if (node.children && node.children.length) { %>
+<li class="nav-item">
+    <a class="nav-link py-1 d-flex justify-content-between align-items-center <%= node.open ? '' : 'collapsed' %>" data-bs-toggle="collapse" href="#pm-<%= sid %>" role="button" aria-expanded="<%= node.open ? 'true' : 'false' %>">
+        <span><%= node.label %></span>
+        <span class="small opacity-50" aria-hidden="true">▾</span>
+    </a>
+    <div class="collapse <%= node.open ? 'show' : '' %>" id="pm-<%= sid %>">
+        <ul class="nav flex-column ps-3 ms-1 my-1 border-start border-secondary border-opacity-25">
+            <% node.children.forEach(function (ch) { %>
+                <%- include('panel-menu-node.ejs', { node: ch }) %>
+            <% }); %>
+        </ul>
+    </div>
+</li>
+<% } else if (node.href) { %>
+<li class="nav-item">
+    <a class="nav-link py-1 <%= node.active ? 'active' : '' %>" href="<%= node.href %>"><%= node.label %></a>
+</li>
+<% } %>

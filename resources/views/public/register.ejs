@@ -1,0 +1,29 @@
+<div class="mx-auto" style="max-width: 22rem;">
+    <h1 class="h3 fw-bold mb-4">Регистрация</h1>
+    <% if (typeof error === 'string' && error) { %>
+        <div class="alert alert-danger"><%= error %></div>
+    <% } %>
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+            <form method="post" action="/register">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <div class="mb-3">
+                    <label class="form-label" for="email">Email</label>
+                    <input class="form-control" type="email" id="email" name="email" value="<%= typeof email !== 'undefined' ? email : '' %>" required autocomplete="email">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="password">Пароль</label>
+                    <input class="form-control" type="password" id="password" name="password" required autocomplete="new-password" minlength="8">
+                    <div class="form-text">Не меньше 8 символов</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="password_confirm">Пароль ещё раз</label>
+                    <input class="form-control" type="password" id="password_confirm" name="password_confirm" required autocomplete="new-password" minlength="8">
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Создать аккаунт</button>
+            </form>
+        </div>
+    </div>
+    <p class="text-center text-muted small mt-3 mb-0">Уже есть аккаунт? <a href="/login">Вход</a></p>
+    <p class="text-center mt-2"><a class="small" href="/">На главную</a></p>
+</div>

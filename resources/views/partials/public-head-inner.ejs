@@ -1,0 +1,23 @@
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= typeof title !== 'undefined' ? title : 'Easy Engine' %></title>
+    <script>
+(function(){
+var p='ee_public_theme=';
+var a=document.cookie.split(';');
+var v='system';
+for(var i=0;i<a.length;i++){
+var x=a[i].trim();
+if(x.indexOf(p)!==0)continue;
+try{v=decodeURIComponent(x.slice(p.length));}catch(e){}
+break;
+}
+if(v!=='light'&&v!=='dark'&&v!=='system')v='system';
+var t=v==='dark'?'dark':v==='light'?'light':(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+document.documentElement.setAttribute('data-bs-theme',t);
+})();
+    </script>
+    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <% if (typeof themeStyleHref === 'string' && themeStyleHref.length) { %>
+    <link rel="stylesheet" href="<%= themeStyleHref %>">
+    <% } %>

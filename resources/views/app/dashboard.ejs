@@ -1,0 +1,34 @@
+<% const displayName = user.username || user.email; %>
+<% const roleLabel = user.role === 'admin' ? 'Администратор' : user.role === 'moderator' ? 'Модератор' : 'Пользователь'; %>
+
+<div class="mb-4">
+    <h1 class="h3 fw-bold mb-1">Здравствуйте, <%= displayName %></h1>
+    <p class="text-muted mb-0">Личный кабинет</p>
+</div>
+
+<div class="row g-4">
+    <div class="col-12 col-lg-5">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <h2 class="h6 text-uppercase text-muted fw-semibold mb-3" style="font-size: 0.7rem; letter-spacing: 0.08em;">Аккаунт</h2>
+                <dl class="row small mb-0">
+                    <dt class="col-4 text-muted">Имя пользователя</dt>
+                    <dd class="col-8 mb-2 text-break"><%= user.username || '—' %></dd>
+                    <dt class="col-4 text-muted">Email</dt>
+                    <dd class="col-8 mb-2 text-break"><%= user.email %></dd>
+                    <dt class="col-4 text-muted">Роль</dt>
+                    <dd class="col-8 mb-0"><span class="badge text-bg-secondary"><%= roleLabel %></span></dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <section class="ee-module-inserts">
+            <div class="row row-cols-1 row-cols-md-2 g-3">
+                <div class="col d-flex">
+                    <%- eeWidget('example:demo-app') %>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
