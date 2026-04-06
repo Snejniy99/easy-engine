@@ -10,7 +10,7 @@
 
 ## Документация
 
-**[https://snejniy99.github.io/index.html](https://snejniy99.github.io/index.html)**
+**[Документация](https://snejniy99.github.io/index.html)**
 
 ## Требования
 
