@@ -50,6 +50,7 @@ export default async function authRoutes(app: FastifyInstance) {
                             title: "Вход",
                             error: "Заполните email и пароль",
                             next: typeof body?.next === "string" ? body.next : "",
+                            registered: false,
                         },
                         publicLayout
                     );
@@ -73,6 +74,7 @@ export default async function authRoutes(app: FastifyInstance) {
                             error: "Неверный email или пароль",
                             next:
                                 typeof body?.next === "string" ? body.next : "",
+                            registered: false,
                         },
                         publicLayout
                     );

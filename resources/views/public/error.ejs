@@ -1,0 +1,48 @@
+<div class="mx-auto" style="max-width: 42rem;">
+    <div class="text-center mb-4">
+        <span class="d-inline-flex align-items-center justify-content-center rounded-3 bg-danger bg-opacity-10 text-danger fw-bold px-3 py-2" style="font-size: 0.85rem; letter-spacing: 0.06em;"><%= statusCode %></span>
+    </div>
+    <h1 class="h3 fw-bold text-center mb-3">
+        <% if (typeof isNotFound !== 'undefined' && isNotFound) { %>
+            Страница не найдена
+        <% } else { %>
+            <% if (statusCode >= 500) { %>
+                Сбой на сервере
+            <% } else if (statusCode >= 400) { %>
+                Ошибка запроса
+            <% } else { %>
+                Ошибка
+            <% } %>
+        <% } %>
+    </h1>
+    <p class="lead text-muted text-center mb-4"><%= userLine %></p>
+    <% if (typeof showDetails !== 'undefined' && showDetails) { %>
+        <div class="card shadow-sm border mb-3">
+            <div class="card-body">
+                <h2 class="h6 text-uppercase text-muted mb-3">Отладка</h2>
+                <dl class="row small mb-0">
+                    <dt class="col-sm-3 text-muted">Сообщение</dt>
+                    <dd class="col-sm-9 font-monospace mb-2"><%= typeof techMessage === 'string' ? techMessage : '' %></dd>
+                    <dt class="col-sm-3 text-muted">Запрос</dt>
+                    <dd class="col-sm-9 mb-0"><code class="small"><%= typeof requestPath === 'string' ? requestPath : '' %></code></dd>
+                </dl>
+            </div>
+        </div>
+        <% if (typeof validationJson === 'string' && validationJson.length) { %>
+            <div class="mb-3">
+                <h2 class="h6 text-uppercase text-muted mb-2">Валидация</h2>
+                <pre class="small bg-body-secondary border rounded-3 p-3 mb-0 text-start overflow-auto" style="max-height: 12rem;"><%= validationJson %></pre>
+            </div>
+        <% } %>
+        <% if (typeof stack === 'string' && stack.length) { %>
+            <div class="mb-4">
+                <h2 class="h6 text-uppercase text-muted mb-2">Стек</h2>
+                <pre class="small bg-body-secondary border rounded-3 p-3 mb-0 text-start overflow-auto" style="max-height: 22rem; white-space: pre-wrap; word-break: break-word;"><%= stack %></pre>
+            </div>
+        <% } %>
+    <% } %>
+    <div class="d-flex flex-wrap gap-2 justify-content-center pt-2">
+        <a href="/" class="btn btn-primary">На главную</a>
+        <button type="button" class="btn btn-outline-secondary" onclick="history.back()">Назад</button>
+    </div>
+</div>

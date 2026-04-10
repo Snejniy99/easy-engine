@@ -7,6 +7,7 @@ import { registerStoredFileRoute } from "../routes/stored-file";
 import { resolveStorageRoot } from "../storage";
 import { refreshThemeRuntime } from "../theme/theme-runtime";
 import { setupPlugins } from "../plugins";
+import { registerErrorPages } from "../http/error-pages";
 
 export async function createConfiguredApp(options: {
     rootDir: string;
@@ -44,6 +45,8 @@ export async function createConfiguredApp(options: {
         getPluginEnabled: (pluginId) =>
             pluginEnabledState.get(pluginId) !== false,
     });
+
+    registerErrorPages(app);
 
     return app;
 }
