@@ -106,6 +106,29 @@ export function resolveThemeLayoutPanelPath(
     );
 }
 
+export function resolveThemeViewPath(
+    rootDir: string,
+    activeSlug: string | null,
+    viewRelativeToViewsDir: string,
+    viewsFallback: string
+): string {
+    const trySlugs = activeSlug ? [activeSlug, "default"] : ["default"];
+    for (const s of trySlugs) {
+        if (!SLUG.test(s)) continue;
+        const rel = posix.join(
+            EE_REL_THEMES,
+            s,
+            "views",
+            viewRelativeToViewsDir
+        );
+        const full = join(rootDir, rel);
+        if (existsSync(full)) {
+            return rel;
+        }
+    }
+    return viewsFallback;
+}
+
 export function themeStyleHref(
     rootDir: string,
     activeSlug: string | null

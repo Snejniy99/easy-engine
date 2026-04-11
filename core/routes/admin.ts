@@ -21,6 +21,7 @@ import {
 import {
     getActiveThemeSlug,
     getLayoutPanelPath,
+    getThemedViewPath,
     refreshThemeRuntime,
 } from "../theme/theme-runtime";
 import { users } from "../schema";
@@ -39,7 +40,7 @@ export default async function adminRoutes(
         const enabledPlugins = plugins.filter((p: { enabled: boolean }) => p.enabled);
 
         return reply.view(
-            `${EE_REL_VIEWS}/index.ejs`,
+            getThemedViewPath("index.ejs"),
             {
                 title: "Панель управления",
                 plugins: enabledPlugins,
@@ -75,7 +76,7 @@ export default async function adminRoutes(
               : `встроенные шаблоны ${EE_REL_VIEWS}/`;
 
         return reply.view(
-            `${EE_REL_VIEWS}/settings.ejs`,
+            getThemedViewPath("settings.ejs"),
             {
                 title: "Настройки системы",
                 plugins: pluginsPage,
@@ -188,7 +189,7 @@ export default async function adminRoutes(
         const metaName = host.ctx.loadedPlugins.find((p) => p.id === pluginId)
             ?.name;
         return reply.view(
-            `${EE_REL_VIEWS}/plugin-admin-settings.ejs`,
+            getThemedViewPath("plugin-admin-settings.ejs"),
             {
                 title: `Параметры: ${metaName ?? pluginId}`,
                 pluginId,

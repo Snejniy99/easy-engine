@@ -13,6 +13,7 @@ import publicRoutes from "../routes/public";
 import { EE_REL_THEMES } from "../paths";
 import type { BootstrapContext } from "./context";
 import { resolveSessionKey } from "./session-key";
+import { createEjsThemeIncluder } from "../theme/ejs-theme-includer";
 import { registerEngineWebSocket } from "../ws/register";
 
 export async function registerSessionViewAdmin(
@@ -32,6 +33,9 @@ export async function registerSessionViewAdmin(
     await app.register(view, {
         engine: { ejs },
         root: ctx.rootDir,
+        options: {
+            includer: createEjsThemeIncluder(ctx.rootDir),
+        },
     });
 
     await app.register(publicRoutes);

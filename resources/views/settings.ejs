@@ -4,7 +4,7 @@
 <div class="card border-0 shadow-sm mb-4">
     <div class="card-header bg-light fw-semibold">Тема сайта (как в WordPress)</div>
     <div class="card-body">
-        <p class="text-muted small mb-3">Каталог <code class="small">resources/themes/&lt;slug&gt;/</code>: <code class="small">theme.json</code>, <code class="small">layouts/layout-public.ejs</code>, <code class="small">layouts/layout-panel.ejs</code>, опционально <code class="small">public/style.css</code>. Пустой выбор — из <code class="small">EE_ACTIVE_THEME</code> / <code class="small">EE_PUBLIC_THEME</code> или тема <code class="small">default</code>.</p>
+        <p class="text-muted small mb-3">Каталог <code class="small">resources/themes/&lt;slug&gt;/</code>: <code class="small">theme.json</code>, <code class="small">layouts/layout-public.ejs</code>, <code class="small">layouts/layout-panel.ejs</code>, при необходимости переопределение страниц в <code class="small">views/public/</code> (например <code class="small">home.ejs</code>), опционально стили <code class="small">public/style.css</code> (раздаётся как <code class="small">/theme-assets/&lt;slug&gt;/…</code>). Пустой выбор — из <code class="small">EE_ACTIVE_THEME</code> / <code class="small">EE_PUBLIC_THEME</code> или тема <code class="small">default</code>.</p>
         <% if (typeof themeEffectiveLabel !== 'undefined') { %>
         <p class="small mb-3"><span class="text-muted">Активная тема:</span> <%= themeEffectiveLabel %></p>
         <% } %>

@@ -6,8 +6,7 @@ import { rotateCsrfToken } from "../auth/csrf";
 import { isValidEmail, normalizeEmail, safeNext } from "../auth/http";
 import { setSessionUser } from "../auth/session-user";
 import { hashPassword, verifyPassword } from "../auth/password";
-import { EE_REL_VIEWS } from "../paths";
-import { getLayoutPublicPath } from "../theme/theme-runtime";
+import { getLayoutPublicPath, getThemedViewPath } from "../theme/theme-runtime";
 import { users } from "../schema";
 
 function isUniqueViolation(e: unknown): boolean {
@@ -45,7 +44,7 @@ export default async function authRoutes(app: FastifyInstance) {
 
                 if (!email || !password) {
                     return reply.view(
-                        `${EE_REL_VIEWS}/public/login.ejs`,
+                        getThemedViewPath("public/login.ejs"),
                         {
                             title: "Вход",
                             error: "Заполните email и пароль",
@@ -68,7 +67,7 @@ export default async function authRoutes(app: FastifyInstance) {
                     !(await verifyPassword(password, user.password))
                 ) {
                     return reply.view(
-                        `${EE_REL_VIEWS}/public/login.ejs`,
+                        getThemedViewPath("public/login.ejs"),
                         {
                             title: "Вход",
                             error: "Неверный email или пароль",
@@ -104,7 +103,7 @@ export default async function authRoutes(app: FastifyInstance) {
 
                 const renderErr = (error: string) =>
                     reply.view(
-                        `${EE_REL_VIEWS}/public/register.ejs`,
+                        getThemedViewPath("public/register.ejs"),
                         {
                             title: "Регистрация",
                             error,

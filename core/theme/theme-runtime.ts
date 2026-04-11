@@ -5,6 +5,7 @@ import {
     computeActiveThemeSlug,
     resolveThemeLayoutPanelPath,
     resolveThemeLayoutPublicPath,
+    resolveThemeViewPath,
     themeStyleHref,
 } from "./engine-theme";
 
@@ -38,4 +39,16 @@ export function getLayoutPanelPath(): string {
 export function getThemeStyleHref(): string | null {
     if (!cachedRootDir) return null;
     return themeStyleHref(cachedRootDir, cachedSlug);
+}
+
+export function getThemedViewPath(relativeUnderViews: string): string {
+    if (!cachedRootDir) {
+        return posix.join(EE_REL_VIEWS, relativeUnderViews);
+    }
+    return resolveThemeViewPath(
+        cachedRootDir,
+        cachedSlug,
+        relativeUnderViews,
+        posix.join(EE_REL_VIEWS, relativeUnderViews)
+    );
 }

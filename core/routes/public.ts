@@ -4,9 +4,8 @@ import {
     safeThemeNext,
     serializePublicThemeCookie,
 } from "../theme/public-theme";
-import { EE_REL_VIEWS } from "../paths";
 import { tryServePluginHomePage } from "../plugins/home-page";
-import { getLayoutPublicPath } from "../theme/theme-runtime";
+import { getLayoutPublicPath, getThemedViewPath } from "../theme/theme-runtime";
 
 export default async function publicRoutes(app: FastifyInstance) {
     app.post("/theme", async (req, reply) => {
@@ -23,7 +22,7 @@ export default async function publicRoutes(app: FastifyInstance) {
     app.get("/", async (req, reply) => {
         if (await tryServePluginHomePage(app, req, reply)) return;
         return reply.view(
-            `${EE_REL_VIEWS}/public/home.ejs`,
+            getThemedViewPath("public/home.ejs"),
             { title: "Easy Engine" },
             { layout: getLayoutPublicPath() }
         );
@@ -38,7 +37,7 @@ export default async function publicRoutes(app: FastifyInstance) {
         const next = typeof q.next === "string" ? q.next : "";
         const registered = q.registered === "1";
         return reply.view(
-            `${EE_REL_VIEWS}/public/login.ejs`,
+            getThemedViewPath("public/login.ejs"),
             { title: "Вход", error: undefined, next, registered },
             { layout: getLayoutPublicPath() }
         );
@@ -50,7 +49,7 @@ export default async function publicRoutes(app: FastifyInstance) {
             return reply.redirect("/app");
         }
         return reply.view(
-            `${EE_REL_VIEWS}/public/register.ejs`,
+            getThemedViewPath("public/register.ejs"),
             {
                 title: "Регистрация",
                 error: undefined,

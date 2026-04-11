@@ -1,6 +1,5 @@
 import type { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import { EE_REL_VIEWS } from "../paths";
-import { getLayoutPublicPath } from "../theme/theme-runtime";
+import { getLayoutPublicPath, getThemedViewPath } from "../theme/theme-runtime";
 
 function isProduction(): boolean {
     return process.env.NODE_ENV === "production";
@@ -72,7 +71,7 @@ async function replyPublicErrorPage(
     }
 ) {
     return reply.code(data.statusCode).view(
-        `${EE_REL_VIEWS}/public/error.ejs`,
+        getThemedViewPath("public/error.ejs"),
         data,
         { layout: getLayoutPublicPath() }
     );
